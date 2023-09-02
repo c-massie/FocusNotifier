@@ -1,7 +1,7 @@
 {
     "KPlugin": {
         "Name": "Focus Notifier",
-        "Description": "Lets you get information via bash about the currently focused window.",
+        "Description": "Lets you get information via bash about the currently focused window. After installation, run the install.sh file - see the website for more information.",
         "Icon": "preferences-system-windows",
 
         "Authors": [
@@ -17,4 +17,6 @@
     "X-Plasma-API": "javascript",
     "X-Plasma-MainScript": "code/main.js",
     "KPackageStructure": "KWin/Script"
+
+
 }
