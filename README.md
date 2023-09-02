@@ -8,7 +8,7 @@ This was intended to facillitate scripting with tools such as [ydotool](https://
 
 ## Installation
 
-This is available through the KDE store and should be able to be installed through the "Get New Scripts" button in "Window Management -> KWin Scripts" in the system settings. You may also install the kwin script manually by downloading this folder and placing it in `~/.local/share/kwin/scripts/`.
+This is available [through the KDE store](https://store.kde.org/p/2080303) and should be able to be installed through the "Get New Scripts" button in "Window Management -> KWin Scripts" in the system settings. You may also install the kwin script manually by downloading this folder and placing it in `~/.local/share/kwin/scripts/`.
 
 Once installed, it should be enabled through the "Window Management -> KWin Scripts" view in the system settings.
 
