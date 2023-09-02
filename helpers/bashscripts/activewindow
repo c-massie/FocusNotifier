@@ -1,0 +1,70 @@
+#!/bin/bash
+
+VARDIR="/tmp/FocusNotifier";
+
+helptext="Usage: $(basename "$0") get [window property]
+
+The properties that can be read are:
+- pid (process ID)
+- pname (process name)
+- name (window name)
+- class (window class)
+- caption (window titlebar text)"
+
+case "$1" in
+    help|--help|-h)
+        echo "$helptext";
+    ;;
+
+    get)
+        case "$2" in
+            help|--help|-h)
+                echo "$helptext";
+            ;;
+
+            pid)
+                if [ -f "$VARDIR/pid.txt" ]; then
+                    echo "$(cat "$VARDIR/pid.txt")";
+                else
+                    echo "(unknown)";
+                fi
+            ;;
+
+            pname)
+                if [ -f "$VARDIR/pname.txt" ]; then
+                    echo "$(cat "$VARDIR/pname.txt")";
+                else
+                    echo "(unknown)";
+                fi
+            ;;
+
+            name)
+                if [ -f "$VARDIR/wname.txt" ]; then
+                    echo "$(cat "$VARDIR/wname.txt")";
+                else
+                    echo "(unknown)";
+                fi
+            ;;
+
+            class)
+                if [ -f "$VARDIR/wclass.txt" ]; then
+                    echo "$(cat "$VARDIR/wclass.txt")";
+                else
+                    echo "(unknown)";
+                fi
+            ;;
+
+            caption)
+                if [ -f "$VARDIR/wcaption.txt" ]; then
+                    echo "$(cat "$VARDIR/wcaption.txt")";
+                else
+                    echo "(unknown)";
+                fi
+            ;;
+        esac
+    ;;
+
+    *)
+        echo "Unrecognised command. Try: $(basename "$0") --help";
+    ;;
+esac

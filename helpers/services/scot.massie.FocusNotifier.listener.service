@@ -1,0 +1,8 @@
+[Unit]
+Description=Listen for dbus messages from FocusNotifier
+
+[Service]
+ExecStart=%h/.local/bin/FocusNotifierListener.sh
+
+[Install]
+WantedBy=default.target
