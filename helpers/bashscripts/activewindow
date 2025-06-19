@@ -32,7 +32,7 @@ case "$1" in
 
             pname)
                 if [ -f "$VARDIR/pname.txt" ]; then
-                    echo "$(cat "$VARDIR/pname.txt")";
+                    ps -p "$(cat "$VARDIR/pid.txt")" -o comm=
                 else
                     echo "(unknown)";
                 fi
