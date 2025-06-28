@@ -1,4 +1,4 @@
-workspace.clientActivated.connect(function(client) {
+workspace.windowActivated.connect(function(client) {
 
     var output = `
         §pid: ${client.pid}
