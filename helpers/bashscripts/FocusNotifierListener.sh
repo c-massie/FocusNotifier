@@ -13,8 +13,10 @@ while read -r line; do
     case "$line" in
         §pid*)
             echo "$value" > "$VARDIR/pid.txt";
-            pname="$(ps -p "$value" -o comm=)" > "$VARDIR/pname.txt";
-            echo "$pname"
+            pname="$(ps -p "$value" -o comm=)";
+            echo "$pname" > "$VARDIR/pname.txt";
+
+            echo "$pname";
             echo "pid: $value";
             echo "pname: $pname";
         ;;
