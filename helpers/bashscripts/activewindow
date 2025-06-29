@@ -9,7 +9,11 @@ The properties that can be read are:
 - pname (process name)
 - name (window name)
 - class (window class)
-- caption (window titlebar text)"
+- caption (window titlebar text)
+
+Usage: $(basename "$0") addchangelistener \"<bash script file path>\"
+Usage: $(basename "$0") removechangelistener \"<bash script file path>\"
+Usage: $(basename "$0") clearchangelisteners"
 
 case "$1" in
     help|--help|-h)
@@ -62,6 +66,57 @@ case "$1" in
                 fi
             ;;
         esac
+    ;;
+
+    addchangelistener)
+        if (( $# < 2 )); then
+            echo "Usage: $(basename "$0") addchangelistener <bash script file path>";
+            exit 1;
+        fi
+
+        pathtoadd="$(realpath $2)";
+
+        if [ ! -f $pathtoadd ]; then
+            echo "The file does not exist: $pathtoadd";
+            echo "Usage: $(basename "$0") addchangelistener <bash script file path>"
+            exit 1;
+        fi
+
+        configdir="$HOME/.config/FocusNotifier";
+        listfile="$configdir/listeners.txt";
+
+        mkdir -p "$configdir";
+        echo "$pathtoadd" | tee -a "$listfile" >/dev/null;
+        echo "Listener added: $pathtoadd";
+    ;;
+
+    removechangelistener)
+        if (( $# < 2 )); then
+            echo "Usage: $(basename "$0") removechangelistener <bash script file path>";
+            exit 1;
+        fi
+
+        pathtoremove="$(realpath $2)";
+
+        configdir="$HOME/.config/FocusNotifier";
+        listfile="$configdir/listeners.txt";
+
+        if [ ! -f $listfile ] || ! grep -Fxq -- "$pathtoremove" "$listfile"; then
+            echo "Listener not already added: $pathtoremove";
+            exit 0;
+        fi
+
+        tmpfile="$(mktemp)"
+        grep -vFx -- "$pathtoremove" "$listfile" > "$tmpfile" && mv "$tmpfile" "$listfile";
+        echo "Listener removed: $pathtoremove";
+    ;;
+
+    clearchangelisteners)
+        configdir="$HOME/.config/FocusNotifier";
+        listfile="$configdir/listeners.txt";
+
+        rm "$listfile";
+        echo "Listeners cleared.";
     ;;
 
     *)

@@ -35,5 +35,18 @@ while read -r line; do
             echo "$value" > "$VARDIR/wcaption.txt";
             echo "caption: $value";
         ;;
+
+        §end)
+            configdir="$HOME/.config/FocusNotifier"
+            listfile="$configdir/listeners.txt"
+
+            if [ -f $listfile ]; then
+                for listener in $(cat "$listfile")
+                do
+                    echo "Calling listener: $listener"
+                    bash "$listener"
+                done
+            fi
+        ;;
     esac
 done < <(dbus-monitor "destination=scot.massie.FocusNotifier,path=/scot/massie/FocusNotifier,interface=scot.massie.FocusNotifier")

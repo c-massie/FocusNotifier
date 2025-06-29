@@ -5,6 +5,7 @@ workspace.windowActivated.connect(function(client) {
         §wname: ${client.resourceName}
         §wclass: ${client.resourceClass}
         §wcaption: ${client.caption}
+        §end
     `;
 
     callDBus("scot.massie.FocusNotifier",
