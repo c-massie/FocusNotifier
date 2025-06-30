@@ -1,4 +1,7 @@
-workspace.windowActivated.connect(function(client) {
+let windowActivated = workspace.windowActivated ?? workspace.clientActivated;
+// .windowActivated for KDE 6, .clientActivated for KDE 5.
+
+windowActivated.connect(function(client) {
 
     var output = `
         §pid: ${client.pid}
