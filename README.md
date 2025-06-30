@@ -29,7 +29,14 @@ Once installed, you should be able to run the command `activewindow`.
 - - `name` (the window name)
 - - `class` (the window class)
 - - `caption` (the window's titlebar text, if applicable)
+- `addchangelistener <bash script filepath>`
+- `removechangelistener <bash script filepath>`
+- `clearchangelisteners`
+
+`addchangelistener` and `removechangelistener` register and deregister bash scripts at the given path to be executed when the active window changes. `clearchangelisteners` deregisters all bash scripts.
 
 ## How it works
 
 The KWin script listens to when focus is changed. It sends this information over DBus, which is then listened to by the listener script, which is run as a systemd service. The listener script stores this information in temp files, which can then be retrieved using the `activewindow` command.
+
+The commands to manage listeners store absolute filepaths in ~/.config/FocusNotifier/listeners.txt. When the active window changes, each extant file referenced in that list is executed sequentially (using `bash <file>`) after information about the active window has been saved. (Meaning you can use the `activewindow` command in those scripts)
